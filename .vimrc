@@ -109,6 +109,3 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <Leader>d <Plug>(go-doc)
 " == The :w <cr> saves the file before running the action. Thanks to autowrite, no need to do this for build, run, etc.
 au FileType go nmap <leader>t :w<cr><Plug>(go-test)
-
-" Boilerplate for Go
-au FileType go nmap 0err oif err != nil {<CR>log.Println(err)<CR>return err<CR>}<ESC>k^
