@@ -10,6 +10,8 @@ Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
+Plugin 'SirVer/ultisnips'
+Plugin '1ny/vim-snippets'
 call vundle#end()
 
 " Colors
@@ -71,6 +73,12 @@ let &listchars = "tab:  ,trail:\u2588,extends:>,precedes:<,nbsp:\u00b7" " Show t
 " YCM
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 " File specific
 
