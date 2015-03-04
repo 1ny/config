@@ -17,8 +17,6 @@ call vundle#end()
 " Colors
 set background=dark
 colorscheme solarized
-" Remove SpecialKey background color from Solarized
-hi SpecialKey ctermbg=NONE guibg=NONE ctermfg=234 guifg=#1c1c1c
 syntax enable " enable allows syntax highlighting, 'on' overwrites your settings and uses default
 
 " Everything
