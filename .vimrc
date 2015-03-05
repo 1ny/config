@@ -46,6 +46,8 @@ set encoding=utf-8 " Default encoding utf-8
 set completeopt+=longest,menuone " Make completion menu work like in IDE
 set incsearch " Automatically move cursor to search matches
 set hlsearch " Highlight all search matches
+" Switch off highlight for current search on pressing enter
+nnoremap <silent> <CR> :nohlsearch<CR>
 set autowrite " Write file when focus is lost. Useful for build, run, etc
 set scrolloff=3 " Know the context -- scroll page when 3 lines close to the edge
 " Quickly switch between next/previous buffers
