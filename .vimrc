@@ -11,7 +11,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'SirVer/ultisnips'
-Plugin '1ny/vim-snippets'
+Plugin 'honza/vim-snippets'
 call vundle#end()
 
 " Colors
