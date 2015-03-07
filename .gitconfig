@@ -1,0 +1,28 @@
+[alias]
+  # List commits showing changed files
+  l = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  # Show history of a file
+  lf = log -u
+  # View the current working tree status using the short format
+  s = status -s
+  # Diff
+  d = diff --patch-with-stat
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
+  # Commit
+  c = commit -a -m
+  # Add interactive
+  a = add -i
+  # Branch
+  b = branch
+  # Undo commit and add
+  r = reset HEAD~1
+  # Reset hard
+  rh = reset --hard
+[push]
+  default = current
+[user]
+  name = Namit
+  email = namityadav@gmail.com
+[color]
+  ui = auto
