@@ -11,7 +11,6 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 call vundle#end()
 
 " Colors
@@ -24,6 +23,8 @@ filetype plugin indent on " Languade dependent indenting
 " The Esc key is just so far
 inoremap jk <esc>
 inoremap kj <esc>
+" yy already yanks the whole line. Y should yank from cursor to end of line (like D & C)
+nnoremap Y y$
 set smartindent " Smartly maintains indent level
 set tabstop=2 " Tab is two spaces
 set shiftwidth=2 " Indent is two spaces
@@ -59,6 +60,9 @@ inoremap <S-TAB> <C-X><C-O>
 " Leader
 let mapleader = "\<space>"
 let g:mapleader = "\<space>"
+" { and } skip over closed folds
+nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
+nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
 
 " Status line
 " set statusline=%f\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
