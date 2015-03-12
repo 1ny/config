@@ -15,8 +15,8 @@
   a = add -i
   # Branch
   b = branch
-  # Undo commit and add
-  r = reset HEAD~1
+  # Reset unstaged changes
+  r = git checkout -- .
   # Reset hard
   rh = reset --hard
 [push]
