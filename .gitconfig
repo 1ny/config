@@ -17,7 +17,7 @@
   # Branch
   b = branch
   # Reset unstaged changes
-  r = git checkout -- .
+  r = checkout -- .
   # Reset hard
   rh = reset --hard
 [push]
