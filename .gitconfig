@@ -7,7 +7,7 @@
   s = status -s
   # Diff
   d = diff --patch-with-stat
-  do = git difftool -t opendiff -y
+  do = difftool -t opendiff -y
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull; git submodule foreach git pull origin master"
   # Commit
