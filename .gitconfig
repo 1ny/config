@@ -10,8 +10,12 @@
   do = difftool -t opendiff -y
   # Pull in remote changes for the current repository and all its submodules
   p = !"git pull; git submodule foreach git pull origin master"
-  # Commit
-  c = commit -a -m
+  # Commit all
+  ca = !git add -A && git commit -v -m
+  # Commit existing
+  ce = !git add -u && git commit -v -m
+  # Checkout
+  co = checkout
   # Add interactive
   a = add -i
   # Branch
