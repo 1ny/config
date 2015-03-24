@@ -26,6 +26,7 @@ inoremap kj <esc>
 " yy already yanks the whole line. Y should yank from cursor to end of line (like D & C)
 nnoremap Y y$
 set smartindent " Smartly maintains indent level
+set showcmd " Show the command being executed
 set tabstop=2 " Tab is two spaces
 set shiftwidth=2 " Indent is two spaces
 set expandtab " Switch tabs to spaces
@@ -51,6 +52,8 @@ set hlsearch " Highlight all search matches
 nnoremap <silent> <CR> :nohlsearch<CR>
 set autowrite " Write file when focus is lost. Useful for build, run, etc
 set scrolloff=3 " Know the context -- scroll page when 3 lines close to the edge
+set wildmenu " Tab completion for files & commands
+set wildmode=list:longest,full " Complete on longest match and show full completions
 " Quickly switch between next/previous buffers
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprevious<CR>
