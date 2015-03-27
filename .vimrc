@@ -8,7 +8,7 @@ Plugin 'gmarik/vundle'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'altercation/vim-colors-solarized'
-" Plugin 'scrooloose/syntastic' " Slows down vim
+Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'SirVer/ultisnips'
 call vundle#end()
@@ -71,11 +71,14 @@ set undodir=~/.vim/undo
 set undofile
 set undolevels=1000 " maximum number of changes that can be undone
 set undoreload=10000 " maximum number lines to save for undo on a buffer reload
+" iTerm2 change insert mode cursor
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " Status line
 " set statusline=%f\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 0
+let g:airline#extensions#syntastic#enabled = 1
 
 " Invisible characters
 set list " Show invisible characters
