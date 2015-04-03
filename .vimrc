@@ -113,11 +113,7 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
-au FileType go nmap gd <Plug>(go-def)
-au FileType go nmap gb <Plug>(go-doc-browser)
-au FileType go nmap <Leader>s <Plug>(go-def-split)
-au FileType go nmap <Leader>v <Plug>(go-def-vertical)
-au FileType go nmap <Leader>t <Plug>(go-def-tab)
+au FileType go nmap <Leader>f <Plug>(go-def)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
