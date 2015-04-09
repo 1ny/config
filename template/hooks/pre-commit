@@ -4,11 +4,7 @@
 
 PRODUCTION_BRANCHES = ["production"]
 
-def current_branch()
-  `git rev-parse --abbrev-ref=strict HEAD`.chomp
-end
-
-branch = current_branch
+branch = `git rev-parse --abbrev-ref=strict HEAD`.chomp
 
 if (PRODUCTION_BRANCHES.include?(branch))
   puts "\nDo you really want to commit on '#{branch}' branch?\nIf yes, add --no-verify to the commit command to force it."
