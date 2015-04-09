@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+# (1) Prevent any commit to production branches
+
+PRODUCTION_BRANCHES = ["production"]
+
+def current_branch()
+  `git rev-parse --abbrev-ref=strict HEAD`.chomp
+end
+
+branch = current_branch
+
+if (PRODUCTION_BRANCHES.include?(branch))
+  puts "\nDo you really want to commit on '#{branch}' branch?\nIf yes, add --no-verify to the commit command to force it."
+  exit 1
+end
+
+# (2) Prevent any commit of big files
+
+MAX_FILE_SIZE = 10 * 1000 * 1024 # 10MB
+
+files = `git status --porcelain`.split("\n")
+
+files.each do |file|
+  realfile = file.split(/\s+/)[-1]
+  realfile_size = File.size(realfile)
+  if realfile_size > MAX_FILE_SIZE
+    puts "\nFile '#{realfile}' has size #{realfile_size / 1024}KB which is bigger than max size #{MAX_FILE_SIZE / 1024}KB.\nAdd --no-verify to the commit command if you want to force the commit."
+    exit 1
+  end
+end
