@@ -1,3 +1,5 @@
+[init]
+  templatedir = ~/git/config/template
 [alias]
   # List commits showing changed files
   l = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
