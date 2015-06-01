@@ -60,9 +60,19 @@ nnoremap <C-h> :bprevious<CR>
 set history=100 " remember 100 previous searches/commands
 " Omnicomplete shift-tab
 inoremap <S-TAB> <C-X><C-O>
+
 " Leader
 let mapleader = "\<space>"
 let g:mapleader = "\<space>"
+" In visual mode
+vmap <Leader>y "+y
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+" In normal mode
+nmap <Leader>y "+y
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+
 " { and } skip over closed folds
 nnoremap <expr> } foldclosed(search('^$', 'Wn')) == -1 ? "}" : "}j}"
 nnoremap <expr> { foldclosed(search('^$', 'Wnb')) == -1 ? "{" : "{k{"
