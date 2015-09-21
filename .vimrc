@@ -22,7 +22,6 @@ syntax enable " enable allows syntax highlighting, 'on' overwrites your settings
 filetype plugin indent on " Languade dependent indenting
 " The Esc key is just so far
 inoremap jk <esc>
-inoremap kj <esc>
 " yy already yanks the whole line. Y should yank from cursor to end of line (like D & C)
 nnoremap Y y$
 set smartindent " Smartly maintains indent level
