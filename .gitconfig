@@ -18,6 +18,7 @@
   ce = !git add -u && git commit -v -m
   # Checkout
   co = checkout
+  cm = checkout master
   # Add interactive
   a = add -i
   # Branch
