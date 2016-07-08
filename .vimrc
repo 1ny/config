@@ -115,6 +115,9 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
+" Syntastic go checkers
+let g:syntastic_go_checkers = ['go', 'golint', 'govet']
+
 " Go / vim-go
 let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
