@@ -24,6 +24,8 @@ filetype plugin indent on " Languade dependent indenting
 inoremap jk <esc>
 " yy already yanks the whole line. Y should yank from cursor to end of line (like D & C)
 nnoremap Y y$
+" Use more obvious U for redo instead of C-r
+nnoremap U <C-r>
 set smartindent " Smartly maintains indent level
 set showcmd " Show the command being executed
 set tabstop=2 " Tab is two spaces
