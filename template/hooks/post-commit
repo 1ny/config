@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# modified from http://brunohq.com/journal/speed-project-git-hook-for-asana/
+# It's only for automatically referencing commits in Asana tasks.
+#
+# -----------------------
+# necessary configuration:
+# git config --global user.asana-token "MY_ASANA_PERSONAL_ACCESS_TOKEN" (http://app.asana.com/-/account_api)
+# -----------------------
+
+access_token=$(git config user.asana-token)
+
+# defaults
+if [ $access_token == "" ]; then
+    echo "Please Set Your Asana Token git config --global user.asana-token \"MY_ASANA_PERSONAL_ACCESS_TOKEN\" (http://app.asana.com/-/account_api)" >&2
+    exit 1
+fi
+
+# Find repository host
+for repository in $(git remote -v | awk '{ print $2 }'); do
+    scheme="$(echo $repository | grep :// | sed -e's,^\(.*://\).*,\1,g')"
+    url="$(echo ${repository/$scheme/})"
+    user="$(echo $url | grep @ | cut -d@ -f1)"
+    if [[ $scheme == "" ]]; then
+        host="$(echo ${url/$user@/} | cut -d: -f1)"
+        path="$(echo $url | grep : | cut -d: -f2-)"
+    else
+        host="$(echo ${url/$user@/} | cut -d/ -f1)"
+        path="$(echo $url | grep / | cut -d/ -f2-)"
+    fi
+    project="$(echo ${path%.*})"
+
+    # Bitbucket or GitHub
+    if [[ $host == "bitbucket.org" ]]; then
+        commit_url="https://bitbucket.org/$project/commits/"
+        break;
+    elif [[ $host == "github.com" ]]; then
+        commit_url="https://github.com/$project/commit/"
+        break;
+    else
+        commit_url=""
+    fi
+done
+
+# regex pattern to recognize a story number
+# Example https://app.asana.com/0/147234847303935/168263360485487
+taskid_pattern='https://app\.asana\.com/0/[0-9]+/([0-9]+)'
+
+# get the checkin comment for parsing
+comment=$(git log --pretty=format:"%B" -n1 | tr '\n' ' ')
+
+branch=$(git rev-parse --abbrev-ref --quiet HEAD)
+branch_message=" in branch $branch"
+
+if [[ $commit_url == "" ]]; then
+    print_comment=$(git log -n1 --pretty=format:"Committed %h$branch_message on $repository:%n<code>%B</code>")
+else
+    print_comment=$(git log -n1 --pretty=format:"Committed$branch_message: $commit_url%H%n<code>%B</code>")
+fi
+
+# break the commit comment down into words
+IFS=' ' read -a words <<< "$comment"
+
+for element in "${words[@]}"
+do
+    # if we have a task id, save it to the appropriate array
+    if [[ $element =~ $taskid_pattern ]]; then
+        curl \
+          -H "Authorization: Bearer ${access_token}" \
+          -X POST \
+          --data-urlencode "html_text=${print_comment}" \
+          "https://app.asana.com/api/1.0/tasks/${BASH_REMATCH[1]}/stories" \
+          > /dev/null 2>&1
+    fi
+done
