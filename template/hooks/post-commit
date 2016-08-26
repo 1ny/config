@@ -14,37 +14,43 @@ if [ $access_token == "" ]; then
     exit 1
 fi
 
-remote=$(git remote -v)
+branch=$(git rev-parse --abbrev-ref=strict HEAD)
 
-project_pattern="\(fetch\).*git@bitbucket.org:(.*).git \(push\)"
-if [[ $remote =~ $project_pattern ]]; then
-  project=${BASH_REMATCH[1]}
-else
-  echo "[post-commit] Unable to find Bitbucket project"
-  exit 1
+if [ $branch == "master" ]; then
+
+  remote=$(git remote -v)
+
+  project_pattern="\(fetch\).*git@bitbucket.org:(.*).git \(push\)"
+  if [[ $remote =~ $project_pattern ]]; then
+    project=${BASH_REMATCH[1]}
+  else
+    echo "[post-commit] Unable to find Bitbucket project"
+    exit 1
+  fi
+
+  hash=$(git rev-parse HEAD)
+
+  commit_url="https://bitbucket.org/$project/commits/$hash"
+
+  print_comment="Commit: $commit_url"
+
+  comment=$(git log --pretty=format:"%B" -n1 | tr '\n' ' ')
+
+  IFS=' ' read -a words <<< "$comment"
+
+  taskid_pattern="https://app\.asana\.com/0/[0-9]+/([0-9]+)"
+
+  for element in "${words[@]}"
+  do
+      if [[ $element =~ $taskid_pattern ]]; then
+        echo "[post-commit] Adding commit comment to Asana" >&2
+          curl \
+            -H "Authorization: Bearer ${access_token}" \
+            -X POST \
+            --data-urlencode "html_text=${print_comment}" \
+            "https://app.asana.com/api/1.0/tasks/${BASH_REMATCH[1]}/stories" \
+            > /dev/null 2>&1
+      fi
+  done
+
 fi
-
-hash=$(git rev-parse HEAD)
-
-commit_url="https://bitbucket.org/$project/commits/$hash"
-
-print_comment="Committed $commit_url"
-
-comment=$(git log --pretty=format:"%B" -n1 | tr '\n' ' ')
-
-IFS=' ' read -a words <<< "$comment"
-
-taskid_pattern="https://app\.asana\.com/0/[0-9]+/([0-9]+)"
-
-for element in "${words[@]}"
-do
-    if [[ $element =~ $taskid_pattern ]]; then
-      echo "[post-commit] Adding commit comment to Asana" >&2
-        curl \
-          -H "Authorization: Bearer ${access_token}" \
-          -X POST \
-          --data-urlencode "html_text=${print_comment}" \
-          "https://app.asana.com/api/1.0/tasks/${BASH_REMATCH[1]}/stories" \
-          > /dev/null 2>&1
-    fi
-done
