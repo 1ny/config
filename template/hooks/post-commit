@@ -20,7 +20,7 @@ if [ $branch == "master" ]; then
 
   remote=$(git remote -v)
 
-  project_pattern="\(fetch\).*git@bitbucket.org:(.*).git \(push\)"
+  project_pattern="\(fetch\).*@bitbucket.org[:/](.*).git \(push\)" # Works for both SSH and HTTPS
   if [[ $remote =~ $project_pattern ]]; then
     project=${BASH_REMATCH[1]}
   else
