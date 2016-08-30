@@ -4,13 +4,13 @@
 #
 # -----------------------
 # necessary configuration:
-# git config --global user.asana-token "MY_ASANA_PERSONAL_ACCESS_TOKEN" (http://app.asana.com/-/account_api)
+# git config --global user.asana-token "MY_ASANA_PERSONAL_ACCESS_TOKEN" ( Go to http://app.asana.com/-/account_api then click 'Manage Developer Apps' then click 'Create New Personal Access Token' and call it 'post-commit script' )
 # -----------------------
 
 access_token=$(git config user.asana-token)
 
 if [ $access_token == "" ]; then
-    echo "[post-commit] Set Asana Token git config --global user.asana-token \"MY_ASANA_PERSONAL_ACCESS_TOKEN\" (http://app.asana.com/-/account_api)" >&2
+    echo "[post-commit] Set Asana Token git config --global user.asana-token \"MY_ASANA_PERSONAL_ACCESS_TOKEN\" ( Go to http://app.asana.com/-/account_api then click 'Manage Developer Apps' then click 'Create New Personal Access Token' and call it 'post-commit script' )" >&2
     exit 1
 fi
 
