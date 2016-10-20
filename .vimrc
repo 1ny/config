@@ -1,3 +1,5 @@
+" Get it quickly by:
+" wget http://bit.do/getvimrc OR curl -O -L http://bit.do/getvimrc
 set nocompatible
 filetype off
 
