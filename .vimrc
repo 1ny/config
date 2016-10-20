@@ -62,6 +62,7 @@ nnoremap <C-h> :bprevious<CR>
 set history=100 " remember 100 previous searches/commands
 " Omnicomplete shift-tab
 inoremap <S-TAB> <C-X><C-O>
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 " Leader
 let mapleader = "\<space>"
