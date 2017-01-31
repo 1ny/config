@@ -18,8 +18,11 @@ MAX_FILE_SIZE = 10 * 1000 * 1024 # 10MB
 files = `git status --porcelain`.split("\n")
 
 files.each do |file|
-  realfile = file.split(/\s+/)[-1]
-  realfile_size = File.size(realfile)
+  line = file.split(/\s+/)
+  if line[0] == "D"
+    next
+  end
+  realfile_size = File.size(line[-1])
   if realfile_size > MAX_FILE_SIZE
     puts "\nFile '#{realfile}' has size #{realfile_size / 1024}KB which is bigger than max size #{MAX_FILE_SIZE / 1024}KB.\nAdd --no-verify to the commit command if you want to force the commit."
     exit 1
