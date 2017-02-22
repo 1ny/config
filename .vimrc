@@ -111,14 +111,15 @@ let g:UltiSnipsEditSplit="vertical"
 
 " File specific
 
-" txt
-autocmd BufNewFile,BufRead *.txt setlocal spell " Spell check .txt files
-autocmd BufNewFile,BufRead *.txt set nonumber " Don't show line numbers for text files
+" txt or md
+au BufNewFile,BufRead *.txt,*.md setlocal spell " Spell check text files
+au BufNewFile,BufRead *.txt,*.md set nonumber " Don't show line numbers for text files
+au BufNewFile,BufRead *.txt,*.md hi SpellBad ctermfg=red guifg=red " Highlight bad spellings with red color
 
 " Ruby
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+au FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+au FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+au FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " Syntastic go checkers
 let g:syntastic_go_checkers = ['go', 'golint', 'govet']
