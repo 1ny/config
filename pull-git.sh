@@ -15,3 +15,6 @@ for dir in */ ; do
     echo -e "$RED$branch$RESET for $dir"
   fi
 done
+
+# Hacky hacky - After pulling all repos, copy the Requirements/README.md in Dropbox for easy consumption by QA
+cp $GITDIR/Fusion-Requirements/README.md /Users/namit/Dropbox/Fusion\ Project/FP\ Shared/Requirements/
