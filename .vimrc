@@ -60,6 +60,8 @@ set wildmode=list:full,full " list:full -> List all matches and complete first m
 " Quickly switch between next/previous buffers
 nnoremap <C-l> :bnext<CR>
 nnoremap <C-h> :bprevious<CR>
+" I don't use the ex mode (which Q enables). So, use it to close buffer
+nnoremap Q :bdelete<CR>
 set history=100 " remember 100 previous searches/commands
 " Omnicomplete shift-tab
 inoremap <S-TAB> <C-X><C-O>
