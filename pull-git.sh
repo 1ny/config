@@ -1,6 +1,6 @@
 # !/bin/bash
 
-GITDIR="/Users/namit/git"
+GITDIR="/Users/namit/go/src/github.com/superlinearity"
 BLUE='\x1B[0;34m'
 RED='\x1B[0;31m'
 RESET='\x1B[0m'
