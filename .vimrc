@@ -20,6 +20,9 @@ set background=dark
 colorscheme solarized
 syntax enable " enable allows syntax highlighting, 'on' overwrites your settings and uses default
 
+" Don't highlight italic text in HTML
+highlight htmlItalic term=NONE cterm=NONE gui=NONE
+
 " Everything
 filetype plugin indent on " Languade dependent indenting
 " The Esc key is just so far
