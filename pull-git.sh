@@ -1,12 +1,11 @@
 # !/bin/bash
 
-GITDIR="/Users/namit/git/rhyme-app"
 BLUE='\x1B[0;34m'
 RED='\x1B[0;31m'
 RESET='\x1B[0m'
-cd $GITDIR
+cd ~/git/rhyme-app
 for dir in */ ; do
-  cd $GITDIR/$dir
+  cd $dir
   branch=`git rev-parse --abbrev-ref HEAD`
   if [ "$branch" == "master" ]; then
     echo -e "Pulling $dir"
@@ -14,4 +13,5 @@ for dir in */ ; do
   else
     echo -e "$RED$branch$RESET for $dir"
   fi
+  cd ..
 done
